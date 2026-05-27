@@ -155,7 +155,7 @@ function FanCard({ name, bg, fg }: { name: string; bg: string; fg: string }) {
 function CustomBlock({ label }: { label: string }) {
   return (
     <div className="mx-5 mt-2 grid grid-cols-[auto_1px_1fr] items-center gap-4">
-      <div className="font-display text-white text-[22px] leading-[1.05] max-w-[120px]">
+      <div className="font-display text-white text-[22px] leading-[1.05] max-w-[120px] whitespace-pre-line">
         {label}
       </div>
       <div className="h-20 w-px bg-[#39ff7a]" />
