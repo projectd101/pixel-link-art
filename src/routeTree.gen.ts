@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ScanRouteImport } from './routes/scan'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeRouteImport } from './routes/home'
@@ -28,6 +29,11 @@ const VaultRoute = VaultRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/login'
     | '/onboarding'
+    | '/scan'
     | '/signup'
     | '/vault'
     | '/card/$id'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/login'
     | '/onboarding'
+    | '/scan'
     | '/signup'
     | '/vault'
     | '/card/$id'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/login'
     | '/onboarding'
+    | '/scan'
     | '/signup'
     | '/vault'
     | '/card/$id'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  ScanRoute: typeof ScanRoute
   SignupRoute: typeof SignupRoute
   VaultRoute: typeof VaultRoute
   CardIdRoute: typeof CardIdRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  ScanRoute: ScanRoute,
   SignupRoute: SignupRoute,
   VaultRoute: VaultRoute,
   CardIdRoute: CardIdRoute,
