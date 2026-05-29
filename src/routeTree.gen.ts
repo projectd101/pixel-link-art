@@ -18,6 +18,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as CreateProfileRouteImport } from './routes/create-profile'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DropIdRouteImport } from './routes/drop.$id'
+import { Route as CardIdRouteImport } from './routes/card.$id'
 
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
@@ -64,6 +65,11 @@ const DropIdRoute = DropIdRouteImport.update({
   path: '/drop/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CardIdRoute = CardIdRouteImport.update({
+  id: '/card/$id',
+  path: '/card/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
+  '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
+  '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/vault': typeof VaultRoute
+  '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/vault'
+    | '/card/$id'
     | '/drop/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/vault'
+    | '/card/$id'
     | '/drop/$id'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/vault'
+    | '/card/$id'
     | '/drop/$id'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   SignupRoute: typeof SignupRoute
   VaultRoute: typeof VaultRoute
+  CardIdRoute: typeof CardIdRoute
   DropIdRoute: typeof DropIdRoute
 }
 
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DropIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/card/$id': {
+      id: '/card/$id'
+      path: '/card/$id'
+      fullPath: '/card/$id'
+      preLoaderRoute: typeof CardIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   SignupRoute: SignupRoute,
   VaultRoute: VaultRoute,
+  CardIdRoute: CardIdRoute,
   DropIdRoute: DropIdRoute,
 }
 export const routeTree = rootRouteImport
