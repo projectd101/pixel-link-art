@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -25,6 +26,11 @@ import { Route as CardIdRouteImport } from './routes/card.$id'
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
   path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
+  '/studio': typeof StudioRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
+  '/studio': typeof StudioRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/signup': typeof SignupRoute
+  '/studio': typeof StudioRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
   '/drop/$id': typeof DropIdRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scan'
     | '/signup'
+    | '/studio'
     | '/vault'
     | '/card/$id'
     | '/drop/$id'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scan'
     | '/signup'
+    | '/studio'
     | '/vault'
     | '/card/$id'
     | '/drop/$id'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scan'
     | '/signup'
+    | '/studio'
     | '/vault'
     | '/card/$id'
     | '/drop/$id'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ScanRoute: typeof ScanRoute
   SignupRoute: typeof SignupRoute
+  StudioRoute: typeof StudioRoute
   VaultRoute: typeof VaultRoute
   CardIdRoute: typeof CardIdRoute
   DropIdRoute: typeof DropIdRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/vault'
       fullPath: '/vault'
       preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ScanRoute: ScanRoute,
   SignupRoute: SignupRoute,
+  StudioRoute: StudioRoute,
   VaultRoute: VaultRoute,
   CardIdRoute: CardIdRoute,
   DropIdRoute: DropIdRoute,
