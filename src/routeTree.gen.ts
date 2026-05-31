@@ -11,20 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as StudioRouteImport } from './routes/studio'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ScanRouteImport } from './routes/scan'
-import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as HomeRouteImport } from './routes/home'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as CreateProfileRouteImport } from './routes/create-profile'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DropIdRouteImport } from './routes/drop.$id'
 import { Route as CardIdRouteImport } from './routes/card.$id'
 
 const VaultRoute = VaultRouteImport.update({
@@ -35,11 +30,6 @@ const VaultRoute = VaultRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StudioRoute = StudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -55,11 +45,6 @@ const SettingsRoute = SettingsRouteImport.update({
 const ScanRoute = ScanRouteImport.update({
   id: '/scan',
   path: '/scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -82,29 +67,14 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeRoute = HomeRouteImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CreateProfileRoute = CreateProfileRouteImport.update({
-  id: '/create-profile',
-  path: '/create-profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DropIdRoute = DropIdRouteImport.update({
-  id: '/drop/$id',
-  path: '/drop/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CardIdRoute = CardIdRouteImport.update({
@@ -115,140 +85,105 @@ const CardIdRoute = CardIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/create-profile'
     | '/forgot-password'
-    | '/home'
     | '/login'
     | '/notifications'
     | '/onboarding'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
     | '/card/$id'
-    | '/drop/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/create-profile'
     | '/forgot-password'
-    | '/home'
     | '/login'
     | '/notifications'
     | '/onboarding'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
     | '/card/$id'
-    | '/drop/$id'
   id:
     | '__root__'
     | '/'
-    | '/create-profile'
     | '/forgot-password'
-    | '/home'
     | '/login'
     | '/notifications'
     | '/onboarding'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
     | '/card/$id'
-    | '/drop/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CreateProfileRoute: typeof CreateProfileRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProfileRoute: typeof ProfileRoute
   ScanRoute: typeof ScanRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
-  StudioRoute: typeof StudioRoute
   TermsRoute: typeof TermsRoute
   VaultRoute: typeof VaultRoute
   CardIdRoute: typeof CardIdRoute
-  DropIdRoute: typeof DropIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -265,13 +200,6 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/studio': {
-      id: '/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -293,13 +221,6 @@ declare module '@tanstack/react-router' {
       path: '/scan'
       fullPath: '/scan'
       preLoaderRoute: typeof ScanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -330,13 +251,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -344,25 +258,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/create-profile': {
-      id: '/create-profile'
-      path: '/create-profile'
-      fullPath: '/create-profile'
-      preLoaderRoute: typeof CreateProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/drop/$id': {
-      id: '/drop/$id'
-      path: '/drop/$id'
-      fullPath: '/drop/$id'
-      preLoaderRoute: typeof DropIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/card/$id': {
@@ -377,23 +277,28 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CreateProfileRoute: CreateProfileRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
   PrivacyRoute: PrivacyRoute,
-  ProfileRoute: ProfileRoute,
   ScanRoute: ScanRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
-  StudioRoute: StudioRoute,
   TermsRoute: TermsRoute,
   VaultRoute: VaultRoute,
   CardIdRoute: CardIdRoute,
-  DropIdRoute: DropIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -85,7 +85,7 @@ function BottomNav() {
           if (it.center) {
             return (
               <li key={it.to} className="-mt-10">
-                <Link to={it.to} aria-label={it.label}
+                <Link to={it.to as any} aria-label={it.label}
                       className="h-14 w-14 rounded-full grid place-items-center neu np-glow"
                       style={{ background: "linear-gradient(160deg,#8B0000,#CC0000)" }}>
                   <ShieldLogo size={22} />
@@ -96,7 +96,7 @@ function BottomNav() {
           return (
             <li key={it.to} className="relative">
               {active && <span className="absolute inset-0 -m-1 rounded-2xl glass" />}
-              <Link to={it.to} className="relative flex flex-col items-center gap-1 px-3 py-1"
+              <Link to={it.to as any} className="relative flex flex-col items-center gap-1 px-3 py-1"
                     style={{ color: active ? "#F0F0F0" : "#666" }}>
                 {it.icon}
                 {active && <span className="font-mono text-[8px] tracking-[0.2em]">{it.label.toUpperCase()}</span>}
@@ -113,7 +113,7 @@ function BottomNav() {
 export function NeuButton({ children, className = "", style, onClick, type = "button", href, to }:
   { children: ReactNode; className?: string; style?: CSSProperties; onClick?: () => void; type?: "button" | "submit"; href?: string; to?: string }) {
   const cls = `neu rounded-[14px] px-5 h-12 font-sans font-semibold text-[14px] text-white grid place-items-center active:translate-y-[1px] ${className}`;
-  if (to) return <Link to={to} className={cls} style={style}>{children}</Link>;
+  if (to) return <Link to={to as any} className={cls} style={style}>{children}</Link>;
   if (href) return <a href={href} className={cls} style={style}>{children}</a>;
   return <button type={type} onClick={onClick} className={cls} style={style}>{children}</button>;
 }
