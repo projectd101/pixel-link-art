@@ -1,21 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ShieldLogo, NeuButton, NeuInput } from "@/narnia/ui";
 
-export const Route = createFileRoute("/forgot-password")({ component: Forgot });
+export const Route = createFileRoute("/forgot-password")({
+  head: () => ({ meta: [{ title: "Reset password — Narnia Pass" }] }),
+  component: Forgot,
+});
 
 function Forgot() {
   return (
-    <div className="min-h-screen w-full dpqr-shell">
-      <main className="mx-auto max-w-[440px] px-6 pt-10">
-        <Link to="/login" className="font-mono text-[10px] tracking-[0.3em] text-white/40">← BACK</Link>
-        <h1 className="font-display text-white text-[36px] leading-tight mt-10">Reset password</h1>
-        <p className="font-sans text-white/55 text-[13px] mt-2">We'll send you a recovery link.</p>
-        <form className="mt-8 flex flex-col gap-4" onSubmit={(e)=>{e.preventDefault(); alert("Recovery link sent");}}>
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] tracking-[0.25em] text-white/40">EMAIL</span>
-            <input type="email" required className="h-12 rounded-xl bg-white/[0.04] border border-white/10 px-4 text-white placeholder:text-white/30 outline-none focus:border-white/40" />
-          </label>
-          <button className="mt-2 h-12 rounded-full font-sans font-semibold" style={{ background: "var(--dpqr-accent)", color: "#0a0a0a" }}>Send link</button>
+    <div className="np-shell">
+      <main className="mx-auto max-w-[440px] min-h-screen px-6 pt-14 pb-10 flex flex-col">
+        <div className="flex items-center gap-3"><ShieldLogo size={28} glow /><div className="font-display text-[20px]">Narnia Pass</div></div>
+        <div className="font-display text-[32px] leading-tight mt-10">Reset access.</div>
+        <div className="font-sans text-white/60 text-[13px] mt-2">We'll send you a magic link.</div>
+        <form className="mt-6 flex flex-col gap-3">
+          <NeuInput type="email" placeholder="Email" />
+          <NeuButton type="submit" style={{ background: "linear-gradient(160deg,#8B0000,#CC0000)" }}>Send link</NeuButton>
         </form>
+        <div className="mt-auto text-center">
+          <Link to="/login" className="font-mono text-[11px] text-white/70">‹ BACK TO SIGN IN</Link>
+        </div>
       </main>
     </div>
   );

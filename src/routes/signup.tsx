@@ -1,46 +1,38 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ShieldLogo, NeuButton, NeuInput, GlassPanel } from "@/narnia/ui";
 
-export const Route = createFileRoute("/signup")({ component: Signup });
+export const Route = createFileRoute("/signup")({
+  head: () => ({ meta: [{ title: "Sign up — Narnia Pass" }] }),
+  component: Signup,
+});
 
 function Signup() {
-  const [agree, setAgree] = useState(false);
+  const nav = useNavigate();
   return (
-    <div className="min-h-screen w-full dpqr-shell">
-      <main className="mx-auto max-w-[440px] px-6 pt-10 pb-10">
-        <Link to="/" className="font-mono text-[10px] tracking-[0.3em] text-white/40">← BACK</Link>
-        <div className="mt-10">
-          <div className="font-mono text-[10px] tracking-[0.3em] text-white/40">CREATE ACCOUNT</div>
-          <h1 className="font-display text-white text-[40px] leading-tight mt-2">Claim your<br/>fan identity.</h1>
-        </div>
+    <div className="np-shell">
+      <main className="mx-auto max-w-[440px] min-h-screen px-6 pt-14 pb-10 flex flex-col">
+        <div className="flex items-center gap-3"><ShieldLogo size={28} glow /><div className="font-display text-[20px]">Narnia Pass</div></div>
+        <div className="font-display text-[34px] leading-tight mt-8">Claim your<br/>identity.</div>
 
-        <form className="mt-8 flex flex-col gap-4" onSubmit={(e)=>{e.preventDefault(); window.location.href="/create-profile";}}>
-          <Field label="Email" type="email" placeholder="you@dpqr.app" required />
-          <Field label="Username" type="text" placeholder="@yourname" required />
-          <Field label="Password" type="password" placeholder="At least 8 characters" required minLength={8} />
-
-          <label className="flex items-start gap-3 mt-2 text-white/60 text-[12px] leading-relaxed">
-            <input type="checkbox" checked={agree} onChange={(e)=>setAgree(e.target.checked)} className="mt-0.5 accent-white" />
-            <span>I agree to the <Link to="/terms" className="text-white underline underline-offset-4">Terms</Link> and <Link to="/privacy" className="text-white underline underline-offset-4">Privacy Policy</Link>.</span>
-          </label>
-
-          <button disabled={!agree} className="mt-4 h-12 rounded-full font-sans font-semibold disabled:opacity-40"
-                  style={{ background: "var(--dpqr-accent)", color: "#0a0a0a" }}>Create account</button>
+        <form className="mt-6 flex flex-col gap-3" onSubmit={(e)=>{e.preventDefault(); nav({to:"/onboarding" as any});}}>
+          <NeuInput placeholder="Username" />
+          <NeuInput type="email" placeholder="Email" />
+          <NeuInput type="password" placeholder="Password (min 8)" />
+          <GlassPanel className="p-3">
+            <div className="font-mono text-[10px] text-white/50 tracking-[0.2em]">STARTER PASS</div>
+            <div className="font-sans text-white text-[13px] mt-1">$2.99 — one-time, unlocks everything.</div>
+          </GlassPanel>
+          <NeuButton type="submit" style={{ background: "linear-gradient(160deg,#8B0000,#CC0000)" }}>Create account</NeuButton>
         </form>
 
-        <p className="mt-10 text-center text-white/50 text-[13px]">
-          Already a collector? <Link to="/login" className="text-white underline underline-offset-4">Sign in</Link>
-        </p>
+        <div className="font-mono text-[10px] text-white/40 mt-4 leading-relaxed">
+          By continuing you agree to the <Link to={"/terms" as any} className="text-white/70">Terms</Link> and <Link to={"/privacy" as any} className="text-white/70">Privacy Policy</Link>.
+        </div>
+
+        <div className="mt-auto text-center">
+          <Link to="/login" className="font-mono text-[11px] text-white/70">Have an account? <span className="text-red-400">SIGN IN ›</span></Link>
+        </div>
       </main>
     </div>
-  );
-}
-
-function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="font-mono text-[10px] tracking-[0.25em] text-white/40">{label.toUpperCase()}</span>
-      <input {...props} className="h-12 rounded-xl bg-white/[0.04] border border-white/10 px-4 text-white placeholder:text-white/30 focus:border-white/40 outline-none" />
-    </label>
   );
 }
