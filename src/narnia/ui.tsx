@@ -69,13 +69,13 @@ export function TopBar({ title, back, right }: { title?: string; back?: boolean 
 /* ─── Bottom nav ─────────────────────────────────────────── */
 function BottomNav() {
   const path = useRouterState({ select: s => s.location.pathname });
-  const items = [
+  const items: { to: string; label: string; icon: ReactNode; center?: boolean }[] = [
     { to: "/pass",  label: "Pass",  icon: <IconPass /> },
     { to: "/vault", label: "Vault", icon: <IconVault /> },
     { to: "/drop",  label: "Drop",  icon: <IconBolt />, center: true },
     { to: "/world", label: "World", icon: <IconWorld /> },
     { to: "/me",    label: "Me",    icon: <IconMe /> },
-  ] as const;
+  ];
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 mx-auto max-w-[440px] px-4"
          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 16px)" }}>
