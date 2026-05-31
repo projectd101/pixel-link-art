@@ -16,7 +16,7 @@ function Me() {
         </Link>
       }/>
       <div className="px-5 pt-4 flex items-center gap-4">
-        <Link to={"/card/$id" as any} params={{ id: CARDS[1].id }}>
+        <Link to={"/card/$id" as any} params={{ id: CARDS[1].id } as any}>
           <ClayCard card={CARDS[1]} size="sm" interactive={false} />
         </Link>
         <div>

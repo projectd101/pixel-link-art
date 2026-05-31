@@ -57,7 +57,7 @@ function Vault() {
       <SectionLabel>The deck</SectionLabel>
       <div className="px-5 grid grid-cols-2 gap-x-3 gap-y-6 pb-6">
         {filtered.map(c => (
-          <Link to={"/card/$id" as any} params={{ id: c.id }} key={c.id} className="flex flex-col items-center">
+          <Link to={"/card/$id" as any} params={{ id: c.id } as any} key={c.id} className="flex flex-col items-center">
             <div className="relative">
               <div className="absolute inset-0 translate-y-2 translate-x-1 rounded-[30px]"
                    style={{ background: "rgba(0,0,0,0.5)", filter: "blur(2px)" }} />

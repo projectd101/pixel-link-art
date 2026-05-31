@@ -24,7 +24,7 @@ function World() {
       <SectionLabel>Artist neighborhoods</SectionLabel>
       <div className="flex gap-3 overflow-x-auto no-scrollbar px-5 pb-2">
         {ARTISTS.map(a => (
-          <Link key={a.id} to={"/artist/$id" as any} params={{ id: a.id }} className="shrink-0">
+          <Link key={a.id} to={"/artist/$id" as any} params={{ id: a.id } as any} className="shrink-0">
             <GlassPanel className="w-44 h-32 p-4 relative overflow-hidden">
               <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 30% 0%, ${a.hue}55, transparent 70%)` }} />
               <div className="relative">

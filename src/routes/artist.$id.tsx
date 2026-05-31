@@ -29,7 +29,7 @@ function Artist() {
       <SectionLabel>Drops</SectionLabel>
       <div className="flex gap-3 overflow-x-auto no-scrollbar px-5 pb-2">
         {(cards.length ? cards : CARDS.slice(0,3)).map(c => (
-          <Link key={c.id} to={"/card/$id" as any} params={{ id: c.id }} className="shrink-0">
+          <Link key={c.id} to={"/card/$id" as any} params={{ id: c.id } as any} className="shrink-0">
             <ClayCard card={c} size="md" interactive={false} />
           </Link>
         ))}

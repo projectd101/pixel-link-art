@@ -62,7 +62,7 @@ function Pass() {
       <SectionLabel action={<Link to={"/world" as any} className="font-mono text-[10px] tracking-[0.2em] text-white/50">SEE ALL ›</Link>}>Dropping now</SectionLabel>
       <div className="flex gap-4 overflow-x-auto no-scrollbar px-5 pb-2">
         {liveDrops.map(d => (
-          <Link to={"/card/$id" as any} params={{ id: d.card.id }} key={d.id} className="shrink-0">
+          <Link to={"/card/$id" as any} params={{ id: d.card.id } as any} key={d.id} className="shrink-0">
             <div className="np-breathe"><ClayCard card={d.card} size="md" interactive={false} /></div>
             <GlassPanel className="mt-2 px-2 py-1 inline-block">
               <span className="font-mono text-[10px] text-white/80">${d.price} · {d.supply - d.claimed} left</span>
@@ -99,7 +99,7 @@ function Pass() {
       <SectionLabel>Just revealed</SectionLabel>
       <div className="flex gap-4 overflow-x-auto no-scrollbar px-5 pb-2">
         {CARDS.slice(2,6).map(c => (
-          <Link to={"/card/$id" as any} params={{ id: c.id }} key={c.id} className="shrink-0">
+          <Link to={"/card/$id" as any} params={{ id: c.id } as any} key={c.id} className="shrink-0">
             <ClayCard card={c} size="md" interactive={false} />
             <div className="mt-2 font-mono text-[10px] text-white/50">4,201 wanted · 200 got</div>
           </Link>
