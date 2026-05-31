@@ -1,78 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { PhoneShell, TopBar } from "@/dpqr/Shell";
+import { PhoneShell, TopBar, GlassPanel, NeuButton } from "@/narnia/ui";
 
 export const Route = createFileRoute("/scan")({
-  head: () => ({ meta: [{ title: "Scan — DPqR" }] }),
+  head: () => ({ meta: [{ title: "Scan — Narnia Pass" }] }),
   component: Scan,
 });
 
 function Scan() {
-  const [state, setState] = useState<"idle"|"valid"|"invalid">("idle");
+  const [state, setState] = useState<"idle"|"ok"|"fail">("idle");
   return (
     <PhoneShell>
-      <TopBar title="OFFLINE MODE READY" right={
-        <span className="font-mono text-[10px] tracking-[0.2em] text-white/60 flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> ONLINE
-        </span>
-      } />
-
-      <div className="px-5 pt-5">
-        <div className="font-mono text-[10px] tracking-[0.3em] text-white/50">SCAN & REDEEM</div>
-        <h1 className="font-display text-white text-[30px] leading-tight mt-1">Tap NFC or scan a card.</h1>
+      <TopBar title="VERIFY" back />
+      <div className="px-5 pt-6">
+        <div className="font-display text-white text-[28px] leading-tight">Hold NFC card<br/>or scan QR.</div>
+        <div className="font-mono text-[11px] text-white/50 mt-2">Validates in under 2 seconds.</div>
       </div>
 
-      <div className="px-5 mt-6">
-        <div className="relative aspect-square rounded-3xl border border-white/10 grid place-items-center overflow-hidden"
-             style={{ background: "linear-gradient(180deg,#0a0a0a,#000)" }}>
-          {/* viewfinder */}
-          <div className="absolute inset-8 rounded-2xl border-2 border-white/20" />
-          <Corner cls="top-6 left-6 rotate-0"/><Corner cls="top-6 right-6 rotate-90"/>
-          <Corner cls="bottom-6 right-6 rotate-180"/><Corner cls="bottom-6 left-6 -rotate-90"/>
-          <div className="absolute left-8 right-8 h-px bg-[var(--dpqr-accent)] urgent" style={{ top: "50%" }} />
-          <div className="relative text-center">
-            <div className="font-mono text-[10px] tracking-[0.3em] text-white/50">HOLD CARD STEADY</div>
+      {/* Viewfinder */}
+      <div className="mx-5 mt-6 aspect-square rounded-3xl neu-inset relative overflow-hidden grid place-items-center">
+        {state === "idle" && (
+          <>
+            <div className="absolute inset-6 rounded-2xl border border-red-500/40" />
+            {[["top-6 left-6","tl"],["top-6 right-6","tr"],["bottom-6 left-6","bl"],["bottom-6 right-6","br"]].map(([cls,k])=>(
+              <div key={k} className={`absolute ${cls} h-6 w-6 border-red-500`} style={{
+                borderTopWidth: cls.includes("top")?2:0,
+                borderBottomWidth: cls.includes("bottom")?2:0,
+                borderLeftWidth: cls.includes("left")?2:0,
+                borderRightWidth: cls.includes("right")?2:0,
+              }} />
+            ))}
+            <div className="font-mono text-[10px] tracking-[0.3em] text-white/60">SCANNING…</div>
+          </>
+        )}
+        {state === "ok" && (
+          <div className="text-center">
+            <div className="h-20 w-20 rounded-full mx-auto grid place-items-center" style={{ background: "#0d3", boxShadow: "0 0 40px #0d3" }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <div className="font-display text-white text-[22px] mt-4">VALID</div>
+            <div className="font-mono text-[11px] text-white/60 mt-1">Travis · Astro Tour · GA</div>
           </div>
-        </div>
-
-        <div className="mt-5 grid grid-cols-2 gap-2">
-          <button onClick={()=>setState("valid")} className="h-12 rounded-full font-sans font-semibold text-[13px]" style={{ background: "var(--dpqr-accent)", color: "#0a0a0a" }}>Simulate tap</button>
-          <button onClick={()=>setState("invalid")} className="h-12 rounded-full border border-white/15 text-white text-[13px]">Test invalid</button>
-        </div>
+        )}
+        {state === "fail" && (
+          <div className="text-center">
+            <div className="h-20 w-20 rounded-full mx-auto grid place-items-center" style={{ background: "#c00", boxShadow: "0 0 40px #c00" }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </div>
+            <div className="font-display text-white text-[22px] mt-4">REJECTED</div>
+            <div className="font-mono text-[11px] text-white/60 mt-1">Card not recognized</div>
+          </div>
+        )}
       </div>
 
-      {state === "valid" && (
-        <Result ok title="VALID" lines={[["Owner","Tasha Reyes"],["Access","Backstage · Tier A"],["Remaining uses","1 of 1"],["Card","Midnight Acoustic · 012/500"]]} onClose={()=>setState("idle")} />
-      )}
-      {state === "invalid" && (
-        <Result ok={false} title="INVALID" lines={[["Reason","Already redeemed"],["When","May 22, 21:14"],["Venue","The Forum, LA"]]} onClose={()=>setState("idle")} />
-      )}
+      <div className="px-5 mt-5 grid grid-cols-2 gap-2">
+        <NeuButton onClick={()=>setState("ok")} style={{ background: "linear-gradient(160deg,#005000,#0d3)" }}>Simulate OK</NeuButton>
+        <NeuButton onClick={()=>setState("fail")}>Simulate fail</NeuButton>
+      </div>
+      <NeuButton className="mx-5 mt-2" onClick={()=>setState("idle")}>Reset</NeuButton>
 
-      <div className="h-12" />
+      <GlassPanel className="mx-5 mt-6 p-4 mb-8">
+        <div className="font-mono text-[10px] tracking-[0.3em] text-white/50">TIP</div>
+        <div className="font-sans text-white text-[13px] mt-1">Hold the back of your phone against the card's NFC chip, or center the QR in the frame.</div>
+      </GlassPanel>
     </PhoneShell>
   );
-}
-
-function Result({ ok, title, lines, onClose }: { ok: boolean; title: string; lines: [string,string][]; onClose: ()=>void }) {
-  return (
-    <div className="mx-5 mt-6 rounded-2xl border p-5"
-      style={{ borderColor: ok ? "#34d399" : "#ef4444", background: ok ? "rgba(52,211,153,0.08)" : "rgba(239,68,68,0.08)" }}>
-      <div className="flex items-center gap-2">
-        <span className="h-2.5 w-2.5 rounded-full" style={{ background: ok ? "#34d399" : "#ef4444" }} />
-        <span className="font-mono text-[11px] tracking-[0.3em]" style={{ color: ok ? "#34d399" : "#ef4444" }}>{title}</span>
-      </div>
-      <div className="mt-4 divide-y divide-white/5">
-        {lines.map(([k,v])=>(
-          <div key={k} className="py-2.5 flex items-center justify-between">
-            <span className="font-mono text-[10px] tracking-[0.2em] text-white/40">{k.toUpperCase()}</span>
-            <span className="font-sans text-white text-[13px]">{v}</span>
-          </div>
-        ))}
-      </div>
-      <button onClick={onClose} className="mt-3 h-10 w-full rounded-full border border-white/15 text-white text-[13px]">Done</button>
-    </div>
-  );
-}
-function Corner({ cls }: { cls: string }) {
-  return <span className={`absolute h-5 w-5 border-l-2 border-t-2 ${cls}`} style={{ borderColor: "var(--dpqr-accent)" }} />;
 }

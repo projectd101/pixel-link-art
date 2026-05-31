@@ -9,24 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorldRouteImport } from './routes/world'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as StudioRouteImport } from './routes/studio'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ScanRouteImport } from './routes/scan'
-import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PassRouteImport } from './routes/pass'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as MeRouteImport } from './routes/me'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as HomeRouteImport } from './routes/home'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as CreateProfileRouteImport } from './routes/create-profile'
+import { Route as DropRouteImport } from './routes/drop'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DropIdRouteImport } from './routes/drop.$id'
 import { Route as CardIdRouteImport } from './routes/card.$id'
+import { Route as ArtistIdRouteImport } from './routes/artist.$id'
 
+const WorldRoute = WorldRouteImport.update({
+  id: '/world',
+  path: '/world',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
   path: '/vault',
@@ -35,11 +40,6 @@ const VaultRoute = VaultRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StudioRoute = StudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -57,14 +57,14 @@ const ScanRoute = ScanRouteImport.update({
   path: '/scan',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassRoute = PassRouteImport.update({
+  id: '/pass',
+  path: '/pass',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -77,14 +77,14 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MeRoute = MeRouteImport.update({
+  id: '/me',
+  path: '/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HomeRoute = HomeRouteImport.update({
-  id: '/home',
-  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -92,9 +92,9 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CreateProfileRoute = CreateProfileRouteImport.update({
-  id: '/create-profile',
-  path: '/create-profile',
+const DropRoute = DropRouteImport.update({
+  id: '/drop',
+  path: '/drop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -102,157 +102,164 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DropIdRoute = DropIdRouteImport.update({
-  id: '/drop/$id',
-  path: '/drop/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CardIdRoute = CardIdRouteImport.update({
   id: '/card/$id',
   path: '/card/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtistIdRoute = ArtistIdRouteImport.update({
+  id: '/artist/$id',
+  path: '/artist/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
+  '/drop': typeof DropRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/pass': typeof PassRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
+  '/world': typeof WorldRoute
+  '/artist/$id': typeof ArtistIdRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
+  '/drop': typeof DropRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/pass': typeof PassRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
+  '/world': typeof WorldRoute
+  '/artist/$id': typeof ArtistIdRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/create-profile': typeof CreateProfileRoute
+  '/drop': typeof DropRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/pass': typeof PassRoute
   '/privacy': typeof PrivacyRoute
-  '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
+  '/world': typeof WorldRoute
+  '/artist/$id': typeof ArtistIdRoute
   '/card/$id': typeof CardIdRoute
-  '/drop/$id': typeof DropIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/create-profile'
+    | '/drop'
     | '/forgot-password'
-    | '/home'
     | '/login'
+    | '/me'
     | '/notifications'
     | '/onboarding'
+    | '/pass'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
+    | '/world'
+    | '/artist/$id'
     | '/card/$id'
-    | '/drop/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/create-profile'
+    | '/drop'
     | '/forgot-password'
-    | '/home'
     | '/login'
+    | '/me'
     | '/notifications'
     | '/onboarding'
+    | '/pass'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
+    | '/world'
+    | '/artist/$id'
     | '/card/$id'
-    | '/drop/$id'
   id:
     | '__root__'
     | '/'
-    | '/create-profile'
+    | '/drop'
     | '/forgot-password'
-    | '/home'
     | '/login'
+    | '/me'
     | '/notifications'
     | '/onboarding'
+    | '/pass'
     | '/privacy'
-    | '/profile'
     | '/scan'
     | '/settings'
     | '/signup'
-    | '/studio'
     | '/terms'
     | '/vault'
+    | '/world'
+    | '/artist/$id'
     | '/card/$id'
-    | '/drop/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CreateProfileRoute: typeof CreateProfileRoute
+  DropRoute: typeof DropRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
+  MeRoute: typeof MeRoute
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
+  PassRoute: typeof PassRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProfileRoute: typeof ProfileRoute
   ScanRoute: typeof ScanRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
-  StudioRoute: typeof StudioRoute
   TermsRoute: typeof TermsRoute
   VaultRoute: typeof VaultRoute
+  WorldRoute: typeof WorldRoute
+  ArtistIdRoute: typeof ArtistIdRoute
   CardIdRoute: typeof CardIdRoute
-  DropIdRoute: typeof DropIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/world': {
+      id: '/world'
+      path: '/world'
+      fullPath: '/world'
+      preLoaderRoute: typeof WorldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vault': {
       id: '/vault'
       path: '/vault'
@@ -265,13 +272,6 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/studio': {
-      id: '/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -295,18 +295,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScanRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pass': {
+      id: '/pass'
+      path: '/pass'
+      fullPath: '/pass'
+      preLoaderRoute: typeof PassRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -323,18 +323,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/me': {
+      id: '/me'
+      path: '/me'
+      fullPath: '/me'
+      preLoaderRoute: typeof MeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -344,11 +344,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/create-profile': {
-      id: '/create-profile'
-      path: '/create-profile'
-      fullPath: '/create-profile'
-      preLoaderRoute: typeof CreateProfileRouteImport
+    '/drop': {
+      id: '/drop'
+      path: '/drop'
+      fullPath: '/drop'
+      preLoaderRoute: typeof DropRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -358,13 +358,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/drop/$id': {
-      id: '/drop/$id'
-      path: '/drop/$id'
-      fullPath: '/drop/$id'
-      preLoaderRoute: typeof DropIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/card/$id': {
       id: '/card/$id'
       path: '/card/$id'
@@ -372,38 +365,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CardIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artist/$id': {
+      id: '/artist/$id'
+      path: '/artist/$id'
+      fullPath: '/artist/$id'
+      preLoaderRoute: typeof ArtistIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CreateProfileRoute: CreateProfileRoute,
+  DropRoute: DropRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
+  MeRoute: MeRoute,
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
+  PassRoute: PassRoute,
   PrivacyRoute: PrivacyRoute,
-  ProfileRoute: ProfileRoute,
   ScanRoute: ScanRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
-  StudioRoute: StudioRoute,
   TermsRoute: TermsRoute,
   VaultRoute: VaultRoute,
+  WorldRoute: WorldRoute,
+  ArtistIdRoute: ArtistIdRoute,
   CardIdRoute: CardIdRoute,
-  DropIdRoute: DropIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

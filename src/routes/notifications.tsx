@@ -1,33 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PhoneShell, TopBar } from "@/dpqr/Shell";
+import { PhoneShell, TopBar, GlassPanel } from "@/narnia/ui";
 
 export const Route = createFileRoute("/notifications")({
-  head: () => ({ meta: [{ title: "Notifications — DPqR" }] }),
+  head: () => ({ meta: [{ title: "Notifications — Narnia Pass" }] }),
   component: Notifs,
 });
 
-const ITEMS = [
-  { t: "DROP LIVE", b: "Kairos · Freestyle 19 is live. 62 left.", w: "just now", urgent: true },
-  { t: "TEASER",    b: "Aurora Wave teased Drop 04 — countdown started", w: "2h" },
-  { t: "BATTLE",    b: "Your vote made AURORA take the lead", w: "5h" },
-  { t: "REDEEM",    b: "Your backstage pass was redeemed at The Forum", w: "1d" },
-  { t: "MARKETPLACE", b: "Floor on Sunset Sessions moved to $84", w: "2d" },
-];
-
 function Notifs() {
+  const items = [
+    { tag: "DROP LIVE", text: "Travis · Astro · Drop 04 is live now.", ago: "2m" },
+    { tag: "BATTLE", text: "Your Speed card won the battle vs Travis.", ago: "1h" },
+    { tag: "OFFER", text: "Someone bid $1,180 on your Kairos #008.", ago: "3h" },
+    { tag: "HUNT", text: "A mythic is hidden somewhere. Day 3 unfound.", ago: "yesterday" },
+    { tag: "TICKET", text: "Your Blvck Nova GA ticket is now in your vault.", ago: "2d" },
+  ];
   return (
     <PhoneShell>
-      <TopBar back="/home" title="ACTIVITY" />
-      <div className="px-5 pt-4 flex flex-col gap-2 pb-8">
-        {ITEMS.map((n,i)=>(
-          <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-            <div className="flex items-center gap-2">
-              <span className={`h-1.5 w-1.5 rounded-full ${n.urgent?"bg-red-500 urgent":"bg-white/30"}`} />
-              <span className="font-mono text-[10px] tracking-[0.3em]" style={{color: n.urgent?"#ff3d57":"var(--dpqr-accent)"}}>{n.t}</span>
-              <span className="ml-auto font-mono text-[10px] text-white/40">{n.w}</span>
-            </div>
-            <div className="font-sans text-white text-[13px] mt-2">{n.b}</div>
-          </div>
+      <TopBar title="NOTIFICATIONS" back />
+      <div className="px-5 mt-4 flex flex-col gap-2 pb-8">
+        {items.map((n,i)=>(
+          <GlassPanel key={i} className="p-4">
+            <div className="font-mono text-[10px] tracking-[0.2em] text-red-400">{n.tag}</div>
+            <div className="font-sans text-white text-[13px] mt-1">{n.text}</div>
+            <div className="font-mono text-[10px] text-white/40 mt-2">{n.ago} ago</div>
+          </GlassPanel>
         ))}
       </div>
     </PhoneShell>
